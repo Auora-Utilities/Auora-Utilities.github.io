@@ -39,7 +39,7 @@
             left: 0;
         }
 
-        /* Header Styles */
+/* Header Styles */
         .header {
             text-align: center;
             padding: 1.5rem 2.5rem;
@@ -47,8 +47,7 @@
             color: #fff;
             font-size: 3rem;
             font-weight: bold;
-            background: linear-gradient(135deg, rgba(28, 28, 60, 0.9), rgba(63, 79, 121, 0.9), rgba(110, 123, 150, 0.9), rgba(78, 101, 132, 0.9));
-            background-size: 300% 300%;
+            background: #505050; /* Gray to White gradient */
             margin-bottom: 30px;
             animation: flow 8s ease-in-out infinite;
             position: absolute;
@@ -56,6 +55,7 @@
             opacity: 0;
             animation: moveUp 3s forwards, flow 8s ease-in-out infinite;
         }
+
 
         /* Animation keyframes for flowing gradient */
         @keyframes flow {
@@ -94,7 +94,7 @@
         .qa-section {
             width: 80%;
             max-width: 800px;
-            background: rgba(0, 0, 0, 0.6);
+            background: 505050;
             padding: 20px;
             border-radius: 10px;
             margin-top: 15px;
@@ -118,12 +118,12 @@
             cursor: pointer;
             padding: 10px;
             border-radius: 10px;
-            background: rgba(63, 79, 121, 0.7);
+            background: #505050;
             transition: background 0.3s;
         }
 
         .qa-item:hover {
-            background: rgba(110, 123, 150, 0.7);
+            background: #707070
         }
 
         .qa-item h3 {
@@ -152,7 +152,7 @@
     <!-- Video Background -->
     <div class="video-background">
         <video autoplay loop muted playsinline>
-            <source src="videoplayback.mp4" type="video/mp4">
+            <source src="videoplayback2.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
