@@ -1,0 +1,80 @@
+;
+; Banshee.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=Banshee.cat
+DriverVer = 03/30/2025,17.57.32.815
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+Banshee_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+Banshee.sys  = 1,,
+;
+
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%Banshee.DeviceDesc%=Banshee_Device, Root\Banshee ; TODO: edit hw-id
+
+[Banshee_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+Banshee.sys
+
+;-------------- Service installation
+[Banshee_Device.NT.Services]
+AddService = Banshee,%SPSVCINST_ASSOCSERVICE%, Banshee_Service_Inst
+
+; -------------- Banshee driver install sections
+[Banshee_Service_Inst]
+DisplayName    = %Banshee.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Banshee.sys
+
+;
+;--- Banshee_Device Coinstaller installation ------
+;
+
+[Banshee_Device.NT.CoInstallers]
+AddReg=Banshee_Device_CoInstaller_AddReg
+CopyFiles=Banshee_Device_CoInstaller_CopyFiles
+
+[Banshee_Device_CoInstaller_AddReg]
+;
+
+
+[Banshee_Device_CoInstaller_CopyFiles]
+;
+
+
+[Banshee_Device.NT.Wdf]
+KmdfService =  Banshee, Banshee_wdfsect
+[Banshee_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "Banshee Installation Disk"
+Banshee.DeviceDesc = "Banshee Device"
+Banshee.SVCDESC = "Banshee Service"
